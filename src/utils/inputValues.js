@@ -59,3 +59,60 @@ export const states = [
 export const department = [
     "Sales", "Marketing", "Engineering", "Human Resources", "Legal"
 ]
+
+export const inputValidation = {
+    "firstName": {
+        label: "First Name",
+        type: "text",
+        validation: (value) => value.length > 1,
+        error: "Please provide a frist name with a minimum of 2 characters."
+    },
+    "lastName": {
+        label: "Last Name",
+        type: "text",
+        validation: (value) => value.length > 1,
+        error: "Please provide a Last name with a minimum of 2 characters."
+    },
+    "street": {
+        label: "Street",
+        type: "text",
+        validation: (value) => value.length > 1,
+        error: "Please provide your street",
+    },
+    "city": {
+        label: "City",
+        type: "text",
+        validation: (value) => value.length > 1,
+        error: "Please provide your city",
+    },
+    "zipCode": {
+        label: "Zip Code",
+        type: "number",
+        validation: (value) => String(value).split('').length === 5,
+        error: "Please provide your zip code (minimum 5 digits)",
+    },
+    "employeeBirth": {
+        label: "Date of Birth",
+        type: "Date",
+        validation: () => true,
+        error: "Please provide your date of birth"
+    },
+    "startDate": {
+        label: "Start Date",
+        type: "Date",
+        validation: () => true,
+        error: "Please provide your started date"
+    },
+    "state": {
+        label: "State",
+        type: "text",
+        validation: (v) => states.indexOf(v) > -1,
+        error: "Please provide your state"
+    },
+    "department": {
+        label: "Department",
+        type: "text",
+        validation: (v) => department.indexOf(v) > -1,
+        error: "Please provide your department"
+    },
+}
