@@ -4,23 +4,14 @@ import { department, inputValidation, states } from '../utils/inputValues';
 import { useState } from 'react';
 import { SelectForm } from '../components/SelectForm';
 import { DatePickerValidation } from '../components/DatePickerValidation';
+import { useSelector } from 'react-redux'
+
 export const CreateEmployee = () => {
-    const [employee, setEmployee] = useState({
-        state: states[0],
-        department: department[0]
-    })
-
-    const [isVisible, setVisible] = useState(false)
     const [fieldError, setFieldError] = useState([])
-
-    const handleEmployee = (field, value) => {
-        setEmployee({
-            ...employee,
-            [field]: value
-        })
-    }
+    const [isVisible, setVisible] = useState(false)
+    const employee = useSelector(state => state.employee)
     return (
-        <Container maxWidth="sm" style={{ border: "solid 1px #cfe8fc" }} >
+        <Container maxWidth="sm" style={{ border: "solid 1px black" }} >
             <Modal
                 open={isVisible}
                 onClose={() => setVisible(false)}
@@ -69,19 +60,19 @@ export const CreateEmployee = () => {
                     Create Employee
                 </Typography>
             </Box>
-            <TextInputForm field="firstName" handler={handleEmployee} />
-            <TextInputForm field="lastName" handler={handleEmployee} />
-            <DatePickerValidation field='employeeBirth' handler={handleEmployee} />
-            <DatePickerValidation field='startDate' handler={handleEmployee} />
+            <TextInputForm field="firstName" />
+            <TextInputForm field="lastName" />
+            <DatePickerValidation field='employeeBirth' />
+            <DatePickerValidation field='startDate' />
             <Box my={2}>
                 <fieldset>
-                    <TextInputForm field="street" handler={handleEmployee} />
-                    <TextInputForm field="city" handler={handleEmployee} />
-                    <SelectForm field="state" handler={handleEmployee} options={states} />
-                    <TextInputForm field="zipCode" handler={handleEmployee} />
+                    <TextInputForm field="street" />
+                    <TextInputForm field="city" />
+                    <SelectForm field="state" options={states} />
+                    <TextInputForm field="zipCode" />
                 </fieldset>
             </Box>
-            <SelectForm field="department" handler={handleEmployee} options={department} />
+            <SelectForm field="department" options={department} />
             <Box textAlign={'center'} my={2}>
                 <Button variant='contained' onClick={() => {
                     const errorField = Object.keys(inputValidation).filter((field) => !inputValidation[field].validation(employee[field]))

@@ -2,10 +2,14 @@
 import { Box, InputLabel, Input, FormHelperText } from '@mui/material'
 import { inputValidation } from '../utils/inputValues'
 import { useState } from 'react'
+import { handleField } from '../utils/redux/employee/employee'
+import { useDispatch } from 'react-redux'
 
-export const TextInputForm = ({ field, handler }) => {
+
+export const TextInputForm = ({ field }) => {
     const { label, error, type, validation } = inputValidation[field]
     const [displayErr, setDisplayErr] = useState(false)
+    const dispatch = useDispatch()
     return (
         <Box my={2}>
             <InputLabel>
@@ -17,7 +21,8 @@ export const TextInputForm = ({ field, handler }) => {
                         setDisplayErr(true)
                         e.target.value = ''
                     }
-                    handler(field, e.target.value)
+                    dispatch(handleField({ field, value: e.target.value ? e.target.value : null }))
+                    //handler(field, e.target.value)
                 }} />
             {displayErr &&
                 <FormHelperText error>{error}</FormHelperText>
