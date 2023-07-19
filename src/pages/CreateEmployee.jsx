@@ -1,13 +1,23 @@
-import { FormHelperText, Container, Typography, Button, Box, InputLabel, Input, FormControl, MenuItem, Select } from '@mui/material'
+import { Container, Typography, Button, Box, InputLabel } from '@mui/material'
 import { DatePicker } from '@mui/x-date-pickers'
 import { TextInputForm } from '../components/TextInputForm'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { department, states } from '../utils/inputValues';
 import { useState } from 'react';
+import { SelectForm } from '../components/SelectForm';
 export const CreateEmployee = () => {
-    const [s, setS] = useState(states[0])
-    const [d, setD] = useState(department[0])
+    const [employee, setEmployee] = useState({
+        state: states[0],
+        department: department[0]
+    })
+
+    const handleEmployee = (field, value) => {
+        setEmployee({
+            ...employee,
+            [field]: value
+        })
+    }
     return (
         <Container maxWidth="sm" style={{ border: "solid 1px #cfe8fc" }} >
             <Box align='center' my={2}>
@@ -25,64 +35,32 @@ export const CreateEmployee = () => {
                     Create Employee
                 </Typography>
             </Box>
-            <TextInputForm label="First Name">
-                <Input onChange={(e) => console.log(e.target.value)} />
-                <FormHelperText error>Test</FormHelperText>
-            </TextInputForm>
-            <TextInputForm label="Last Name">
-                <Input onChange={(e) => console.log(e.target.value)} />
-                <FormHelperText error>Test</FormHelperText>
-            </TextInputForm>
-            <TextInputForm label="Date of Birth">
+            <TextInputForm field="firstName" handler={handleEmployee} />
+            <TextInputForm field="lastName" handler={handleEmployee} />
+            <Box my={2}>
+                <InputLabel>Date of Birth</InputLabel>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DatePicker />
+                    <DatePicker onChange={(e) => handleEmployee('employeeBirth', e.$d)} />
                 </LocalizationProvider>
-            </TextInputForm>
-            <TextInputForm label="Start Date">
+            </Box>
+            <Box my={2}>
+                <InputLabel>Start Date</InputLabel>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DatePicker />
+                    <DatePicker onChange={(e) => handleEmployee('startDate', e.$d)} />
                 </LocalizationProvider>
-            </TextInputForm>
+            </Box>
             <Box my={2}>
                 <fieldset>
-                    <legend>Address</legend>
-                    <TextInputForm label="Street">
-                        <Input onChange={(e) => console.log(e.target.value)} />
-                    </TextInputForm>
-                    <TextInputForm label="City">
-                        <Input onChange={(e) => console.log(e.target.value)} />
-                    </TextInputForm>
-                    <FormControl fullWidth>
-                        <InputLabel id="select_state">State </InputLabel>
-                        <Select
-                            labelId="select_state"
-                            id="demo-simple-select"
-                            value={s}
-                            label="Age"
-                            onChange={(e) => setS(e.target.value)}
-                        >
-                            {states.map(state => <MenuItem key={state} value={state}>{state}</MenuItem>)}
-                        </Select>
-                    </FormControl>
-                    <TextInputForm label="Zip Code">
-                        <Input type='number' onChange={(e) => console.log(e.target.value)} />
-                    </TextInputForm>
+                    <TextInputForm field="street" handler={handleEmployee} />
+                    <TextInputForm field="city" handler={handleEmployee} />
+                    <SelectForm field="state" handler={handleEmployee} options={states} />
+                    <TextInputForm field="zipCode" handler={handleEmployee} />
                 </fieldset>
             </Box>
-            <Box style={{ width: "50%" }}>
-                <InputLabel id="demo-simple-select-label">Department</InputLabel>
-                <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={d}
-                    onChange={(e) => setD(e.target.value)}
-                >
-                    {department.map(department => <MenuItem key={department} value={department}>{department}</MenuItem>)}
-                </Select>
-            </Box>
+            <SelectForm field="department" handler={handleEmployee} options={department} />
             <Box textAlign={'center'} my={2}>
-                <Button variant='contained'>Save</Button>
+                <Button variant='contained' onClick={() => { console.log(employee) }}>Save</Button>
             </Box>
-        </Container >
+        </Container>
     )
 }
