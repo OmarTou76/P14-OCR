@@ -1,4 +1,4 @@
-import { Container, Typography, Button, Box, Modal } from '@mui/material'
+import { Container, Typography, Button, Box, Modal, List, ListItem, ListItemText } from '@mui/material'
 import { TextInputForm } from '../components/TextInputForm'
 import { department, inputValidation, states } from '../utils/inputValues';
 import { useState } from 'react';
@@ -31,7 +31,7 @@ export const CreateEmployee = () => {
                     top: '50%',
                     left: '50%',
                     transform: 'translate(-50%, -50%)',
-                    width: 400,
+                    width: 300,
                     bgcolor: 'background.paper',
                     boxShadow: 24,
                     p: 4,
@@ -40,7 +40,13 @@ export const CreateEmployee = () => {
                         <>
                             <Typography>Please check these fields: </Typography>
                             {
-                                fieldError.map(f => <Typography key={f}>{inputValidation[f].label}</Typography>)
+                                <List>
+                                    {fieldError.map(field => (
+                                        <ListItem key={field}>
+                                            <ListItemText primary={inputValidation[field].label} />
+                                        </ListItem>
+                                    ))}
+                                </List>
                             }
                         </>
                         :
@@ -79,10 +85,11 @@ export const CreateEmployee = () => {
             <Box textAlign={'center'} my={2}>
                 <Button variant='contained' onClick={() => {
                     const errorField = Object.keys(inputValidation).filter((field) => !inputValidation[field].validation(employee[field]))
-
                     setFieldError(errorField)
                     setVisible(true)
-                }}>Save</Button>
+                }}>
+                    Save
+                </Button>
             </Box>
         </Container>
     )
