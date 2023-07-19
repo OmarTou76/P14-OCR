@@ -1,16 +1,17 @@
-import { Container, Typography, Button, Box, InputLabel } from '@mui/material'
-import { DatePicker } from '@mui/x-date-pickers'
+import { Container, Typography, Button, Box, Modal } from '@mui/material'
 import { TextInputForm } from '../components/TextInputForm'
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { department, states } from '../utils/inputValues';
+import { department, inputValidation, states } from '../utils/inputValues';
 import { useState } from 'react';
 import { SelectForm } from '../components/SelectForm';
+import { DatePickerValidation } from '../components/DatePickerValidation';
 export const CreateEmployee = () => {
     const [employee, setEmployee] = useState({
         state: states[0],
         department: department[0]
     })
+
+    const [isVisible, setVisible] = useState(false)
+    const [fieldError, setFieldError] = useState([])
 
     const handleEmployee = (field, value) => {
         setEmployee({
@@ -20,6 +21,33 @@ export const CreateEmployee = () => {
     }
     return (
         <Container maxWidth="sm" style={{ border: "solid 1px #cfe8fc" }} >
+            <Modal
+                open={isVisible}
+                onClose={() => setVisible(false)}
+                aria-describedby="modal-modal-description"
+            >
+                <Box sx={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    width: 400,
+                    bgcolor: 'background.paper',
+                    boxShadow: 24,
+                    p: 4,
+                }}>
+                    {fieldError.length ?
+                        <>
+                            <Typography>Please check these fields: </Typography>
+                            {
+                                fieldError.map(f => <Typography key={f}>{inputValidation[f].label}</Typography>)
+                            }
+                        </>
+                        :
+                        <Typography sx={{ mt: 2 }}>Employee Created</Typography>
+                    }
+                </Box>
+            </Modal>
             <Box align='center' my={2}>
                 <Typography variant='h4'>
                     HRnet
@@ -37,18 +65,8 @@ export const CreateEmployee = () => {
             </Box>
             <TextInputForm field="firstName" handler={handleEmployee} />
             <TextInputForm field="lastName" handler={handleEmployee} />
-            <Box my={2}>
-                <InputLabel>Date of Birth</InputLabel>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DatePicker onChange={(e) => handleEmployee('employeeBirth', e.$d)} />
-                </LocalizationProvider>
-            </Box>
-            <Box my={2}>
-                <InputLabel>Start Date</InputLabel>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DatePicker onChange={(e) => handleEmployee('startDate', e.$d)} />
-                </LocalizationProvider>
-            </Box>
+            <DatePickerValidation field='employeeBirth' handler={handleEmployee} />
+            <DatePickerValidation field='startDate' handler={handleEmployee} />
             <Box my={2}>
                 <fieldset>
                     <TextInputForm field="street" handler={handleEmployee} />
@@ -59,7 +77,12 @@ export const CreateEmployee = () => {
             </Box>
             <SelectForm field="department" handler={handleEmployee} options={department} />
             <Box textAlign={'center'} my={2}>
-                <Button variant='contained' onClick={() => { console.log(employee) }}>Save</Button>
+                <Button variant='contained' onClick={() => {
+                    const errorField = Object.keys(inputValidation).filter((field) => !inputValidation[field].validation(employee[field]))
+
+                    setFieldError(errorField)
+                    setVisible(true)
+                }}>Save</Button>
             </Box>
         </Container>
     )

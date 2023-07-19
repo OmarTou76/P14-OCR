@@ -64,43 +64,43 @@ export const inputValidation = {
     "firstName": {
         label: "First Name",
         type: "text",
-        validation: (value) => value.length > 1,
+        validation: (value) => value && value.length > 1 ? true : false,
         error: "Please provide a frist name with a minimum of 2 characters."
     },
     "lastName": {
         label: "Last Name",
         type: "text",
-        validation: (value) => value.length > 1,
+        validation: (value) => value && value.length > 1 ? true : false,
         error: "Please provide a Last name with a minimum of 2 characters."
     },
     "street": {
         label: "Street",
         type: "text",
-        validation: (value) => value.length > 1,
+        validation: (value) => value && value.length > 1 ? true : false,
         error: "Please provide your street",
     },
     "city": {
         label: "City",
         type: "text",
-        validation: (value) => value.length > 1,
+        validation: (value) => value && value.length > 1 ? true : false,
         error: "Please provide your city",
     },
     "zipCode": {
         label: "Zip Code",
         type: "number",
-        validation: (value) => String(value).split('').length === 5,
+        validation: (value) => value && String(value).split('').length === 5 ? true : false,
         error: "Please provide your zip code (minimum 5 digits)",
     },
     "employeeBirth": {
         label: "Date of Birth",
         type: "Date",
-        validation: () => true,
+        validation: (v) => (!v || v == 'Invalid Date') ? false : true,
         error: "Please provide your date of birth"
     },
     "startDate": {
         label: "Start Date",
         type: "Date",
-        validation: () => true,
+        validation: (v) => (!v || v == 'Invalid Date') ? false : true,
         error: "Please provide your started date"
     },
     "state": {
