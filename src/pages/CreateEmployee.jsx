@@ -7,56 +7,27 @@ import { DatePickerValidation } from '../components/DatePickerValidation';
 import { useSelector, useDispatch } from 'react-redux'
 import { Persist } from '../utils/Persist';
 import { reset } from '../utils/redux/employee/employee';
+import { Link } from 'react-router-dom'
 
 export const CreateEmployee = () => {
     const [fieldError, setFieldError] = useState([])
     const [isVisible, setVisible] = useState(false)
     const employee = useSelector(state => state.employee)
     const dispatch = useDispatch()
+
     return (
         <Container maxWidth="sm" style={{ border: "solid 1px black" }} >
-            <Modal
-                open={isVisible}
-                onClose={() => setVisible(false)}
-                aria-describedby="modal-modal-description"
-            >
-                <Box sx={{
-                    position: 'absolute',
-                    top: '50%',
-                    left: '50%',
-                    transform: 'translate(-50%, -50%)',
-                    width: 300,
-                    bgcolor: 'background.paper',
-                    boxShadow: 24,
-                    p: 4,
-                }}>
-                    {fieldError.length ?
-                        <>
-                            <Typography>Please check these fields: </Typography>
-                            {
-                                <List>
-                                    {fieldError.map(field => (
-                                        <ListItem key={field}>
-                                            <ListItemText primary={inputValidation[field].label} />
-                                        </ListItem>
-                                    ))}
-                                </List>
-                            }
-                        </>
-                        :
-                        <Typography sx={{ mt: 2 }}>Employee Created</Typography>
-                    }
-                </Box>
-            </Modal>
             <Box align='center' my={2}>
                 <Typography variant='h4'>
                     HRnet
                 </Typography>
             </Box>
             <Box align='center' my={2}>
-                <Button variant='text' onClick={() => alert("Redirection vers la liste d'employées")}>
-                    View current Employees
-                </Button>
+                <Link to={"/employees"}>
+                    <Button variant='text'>
+                        View current Employees
+                    </Button>
+                </Link>
             </Box>
             <Box align='center' my={2}>
                 <Typography variant='h5'>
@@ -90,6 +61,39 @@ export const CreateEmployee = () => {
                     Save
                 </Button>
             </Box>
-        </Container>
+            <Modal
+                open={isVisible}
+                onClose={() => setVisible(false)}
+                aria-describedby="modal-modal-description"
+            >
+                <Box sx={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    width: 300,
+                    bgcolor: 'background.paper',
+                    boxShadow: 24,
+                    p: 4,
+                }}>
+                    {fieldError.length ?
+                        <>
+                            <Typography>Please check these fields: </Typography>
+                            {
+                                <List>
+                                    {fieldError.map(field => (
+                                        <ListItem key={field}>
+                                            <ListItemText primary={inputValidation[field].label} />
+                                        </ListItem>
+                                    ))}
+                                </List>
+                            }
+                        </>
+                        :
+                        <Typography sx={{ mt: 2 }}>Employee Created</Typography>
+                    }
+                </Box>
+            </Modal>
+        </Container >
     )
 }
