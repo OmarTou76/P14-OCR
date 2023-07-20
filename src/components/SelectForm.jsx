@@ -13,6 +13,7 @@ export const SelectForm = ({ field, options }) => {
 
     useEffect(() => {
         dispatch(handleField({ field, value: options[0] }))
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     return (
         <Box>

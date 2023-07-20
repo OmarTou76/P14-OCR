@@ -4,12 +4,15 @@ import { department, inputValidation, states } from '../utils/inputValues';
 import { useState } from 'react';
 import { SelectForm } from '../components/SelectForm';
 import { DatePickerValidation } from '../components/DatePickerValidation';
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { Persist } from '../utils/Persist';
+import { reset } from '../utils/redux/employee/employee';
 
 export const CreateEmployee = () => {
     const [fieldError, setFieldError] = useState([])
     const [isVisible, setVisible] = useState(false)
     const employee = useSelector(state => state.employee)
+    const dispatch = useDispatch()
     return (
         <Container maxWidth="sm" style={{ border: "solid 1px black" }} >
             <Modal
@@ -78,6 +81,11 @@ export const CreateEmployee = () => {
                     const errorField = Object.keys(inputValidation).filter((field) => !inputValidation[field].validation(employee[field]))
                     setFieldError(errorField)
                     setVisible(true)
+
+                    if (!errorField.length) {
+                        Persist.addEmployee(employee)
+                        dispatch(reset())
+                    }
                 }}>
                     Save
                 </Button>

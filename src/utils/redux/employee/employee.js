@@ -18,9 +18,10 @@ const employee = createSlice({
     reducers: {
         handleField: (state, { payload }) => {
             state[payload.field] = payload.value
-        }
+        },
+        reset: () => initialState
     }
 })
 
-export const { reducer } = employee
-export const { handleField } = employee.actions
+export const { reducer: employeeReducer } = employee
+export const { handleField, reset } = employee.actions
