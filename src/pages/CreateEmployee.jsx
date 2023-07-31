@@ -5,9 +5,9 @@ import { useState } from 'react';
 import { SelectForm } from '../components/SelectForm';
 import { DatePickerValidation } from '../components/DatePickerValidation';
 import { useSelector, useDispatch } from 'react-redux'
-import { Persist } from '../utils/Persist';
-import { reset } from '../utils/redux/employee/employee';
+import { reset } from '../utils/redux/createEmployee/createEmployee';
 import { Link } from 'react-router-dom'
+import { appendEmployee } from '../utils/redux/employees/employees';
 
 export const CreateEmployee = () => {
     const [fieldError, setFieldError] = useState([])
@@ -54,7 +54,7 @@ export const CreateEmployee = () => {
                     setVisible(true)
 
                     if (!errorField.length) {
-                        Persist.addEmployee(employee)
+                        dispatch(appendEmployee({ employee }))
                         dispatch(reset())
                     }
                 }}>

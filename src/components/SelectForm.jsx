@@ -3,7 +3,7 @@ import { Box, InputLabel, FormControl, Select, MenuItem, FormHelperText } from '
 import { inputValidation } from '../utils/inputValues'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { handleField } from '../utils/redux/employee/employee'
+import { handleField } from '../utils/redux/createEmployee/createEmployee'
 import { useEffect } from 'react'
 
 export const SelectForm = ({ field, options }) => {

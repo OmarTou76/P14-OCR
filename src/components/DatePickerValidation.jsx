@@ -6,7 +6,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { inputValidation } from '../utils/inputValues';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux'
-import { handleField } from "../utils/redux/employee/employee";
+import { handleField } from "../utils/redux/createEmployee/createEmployee";
 
 export const DatePickerValidation = ({ field }) => {
     const { label, error, validation } = inputValidation[field]
@@ -23,7 +23,6 @@ export const DatePickerValidation = ({ field }) => {
                     }
                     setDisplayErr(false)
                     dispatch(handleField({ field, value: new Date(e.$d).getTime() }))
-                    //handler(field, e.$d)
                 }} />
             </LocalizationProvider>
             {displayErr &&
