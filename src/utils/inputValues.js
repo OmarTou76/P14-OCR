@@ -118,13 +118,13 @@ export const inputValidation = {
 }
 
 export const columnsTable = [
-    { field: 'firstName', headerName: 'First Name', width: 130 },
-    { field: 'lastName', headerName: 'Last Name', width: 130 },
-    { field: 'department', headerName: 'Department', width: 130 },
-    { field: 'startDate', headerName: 'Start Date', width: 130 },
-    { field: 'employeeBirth', headerName: 'Date of Birth', width: 130 },
-    { field: 'street', headerName: 'Street', width: 130 },
-    { field: 'city', headerName: 'City', width: 130 },
-    { field: 'state', headerName: 'State', width: 130 },
-    { field: 'zipCode', headerName: 'Zip Code', width: 130 },
+    { field: 'firstName', headerName: 'First Name', width: 130, type: String },
+    { field: 'lastName', headerName: 'Last Name', width: 130, type: String },
+    { field: 'department', headerName: 'Department', width: 130, type: String, searchable: false },
+    { field: 'startDate', headerName: 'Start Date', width: 130, type: Date },
+    { field: 'employeeBirth', headerName: 'Date of Birth', width: 130, type: Date },
+    { field: 'street', headerName: 'Street', width: 130, type: String },
+    { field: 'city', headerName: 'City', width: 130, type: String },
+    { field: 'state', headerName: 'State', width: 130, type: String, sortable: false },
+    { field: 'zipCode', headerName: 'Zip Code', width: 130, type: Number },
 ]
