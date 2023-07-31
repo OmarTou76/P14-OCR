@@ -12,8 +12,8 @@ const initialState = {
     department: null
 }
 
-const employee = createSlice({
-    name: 'employee',
+const createEmployee = createSlice({
+    name: 'createEmployee',
     initialState,
     reducers: {
         handleField: (state, { payload }) => {
@@ -23,5 +23,5 @@ const employee = createSlice({
     }
 })
 
-export const { reducer: employeeReducer } = employee
-export const { handleField, reset } = employee.actions
+export const { reducer: createEmployeeReducer } = createEmployee
+export const { handleField, reset } = createEmployee.actions
