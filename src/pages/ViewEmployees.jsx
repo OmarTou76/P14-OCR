@@ -5,17 +5,34 @@ import { DataTable } from 'table-library'
 
 export const ViewEmployees = () => {
     const employees = useSelector(state => state.employees)
+    const theme = {
+        text: {
+            "light": "white",
+            "dark": "black",
+        },
+        primary: {
+            'light': '#c5cae9',
+            'main': "#7986cb",
+            'dark': '#5c6bc0',
+        },
+        gridColors: {
+            light: "#e8eaf6",
+            dark: "#c5cae9",
+            selectedCol: "#c5cae966"
+        }
+    }
     return (
-        <Container maxWidth="lg" >
+        <Container maxWidth="lg">
             <Box align='center' my={2}>
                 <Typography variant='h4'>
                     Current Employees
                 </Typography>
             </Box>
             <div style={{ width: '100%' }}>
-                <DataTable searchBar={false} rows={employees.concat(employees, employees, employees)} columns={columnsTable} />
+                <DataTable searchBar rows={employees.concat(employees, employees, employees)} columns={columnsTable}
+                    theme={theme} itemsPerPage={[10, 5]} />
             </div>
 
-        </Container>
+        </Container >
     )
 }   
