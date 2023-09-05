@@ -7,6 +7,7 @@ import { inputValidation } from '../utils/inputValues';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux'
 import { handleField } from "../utils/redux/createEmployee/createEmployee";
+import { theme } from "../utils/Theme";
 
 export const DatePickerValidation = ({ field }) => {
     const { label, error, validation } = inputValidation[field]
@@ -14,16 +15,17 @@ export const DatePickerValidation = ({ field }) => {
     const dispatch = useDispatch()
     return (
         <Box my={2}>
-            <InputLabel>{label}</InputLabel>
+            <InputLabel style={{ color: theme.palette.text.dark, paddingBottom: ".5rem" }}>{label}</InputLabel>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DatePicker onChange={(e) => {
-                    if (!validation(e.$d)) {
-                        setDisplayErr(true)
-                        return
-                    }
-                    setDisplayErr(false)
-                    dispatch(handleField({ field, value: new Date(e.$d).getTime() }))
-                }} />
+                <DatePicker
+                    onChange={(e) => {
+                        if (!validation(e.$d)) {
+                            setDisplayErr(true)
+                            return
+                        }
+                        setDisplayErr(false)
+                        dispatch(handleField({ field, value: new Date(e.$d).getTime() }))
+                    }} />
             </LocalizationProvider>
             {displayErr &&
                 <FormHelperText error>{error}</FormHelperText>

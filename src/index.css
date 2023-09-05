@@ -1,3 +1,15 @@
-#root{
+body {
+    background: #e8eaf6;
+}
+.container {
+    border: solid 3px;
+    border-radius: 5px;
+    margin: 1.5rem 0;
+}
 
+.inputs
+{
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
 }

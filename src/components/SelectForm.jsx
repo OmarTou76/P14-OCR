@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { handleField } from '../utils/redux/createEmployee/createEmployee'
 import { useEffect } from 'react'
+import { theme } from '../utils/Theme'
 
 export const SelectForm = ({ field, options }) => {
     const { label, error, validation } = inputValidation[field]
@@ -16,12 +17,13 @@ export const SelectForm = ({ field, options }) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     return (
-        <Box>
-            <InputLabel id="select_state">{label}</InputLabel>
+        <Box my={2} className='inputs'>
+            <InputLabel id="select_state" style={{ color: theme.palette.text.dark }}>{label}</InputLabel>
             <FormControl fullWidth>
                 <Select
                     labelId={`select_${field}`}
                     defaultValue={options[0]}
+                    style={{ color: theme.palette.text.dark }}
                     onChange={e => {
                         if (!validation(e.target.value)) {
                             setDisplayErr(true)

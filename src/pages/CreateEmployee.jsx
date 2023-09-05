@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { reset } from '../utils/redux/createEmployee/createEmployee';
 import { Link } from 'react-router-dom'
 import { appendEmployee } from '../utils/redux/employees/employees';
+import { theme } from '../utils/Theme';
 
 export const CreateEmployee = () => {
     const [fieldError, setFieldError] = useState([])
@@ -16,7 +17,11 @@ export const CreateEmployee = () => {
     const dispatch = useDispatch()
 
     return (
-        <Container maxWidth="sm" style={{ border: "solid 1px black" }} >
+        <Container maxWidth="sm" className='container' style={{
+            borderColor: theme.palette.primary.dark,
+            color: theme.palette.text.dark,
+            backgroundColor: theme.palette.primary.light,
+        }} >
             <Box align='center' my={2}>
                 <Typography variant='h4'>
                     HRnet
@@ -24,7 +29,7 @@ export const CreateEmployee = () => {
             </Box>
             <Box align='center' my={2}>
                 <Link to={"/employees"}>
-                    <Button variant='text'>
+                    <Button variant='text' style={{ background: theme.palette.primary.dark, color: theme.palette.text.light }}>
                         View current Employees
                     </Button>
                 </Link>
@@ -39,7 +44,7 @@ export const CreateEmployee = () => {
             <DatePickerValidation field='employeeBirth' />
             <DatePickerValidation field='startDate' />
             <Box my={2}>
-                <fieldset>
+                <fieldset style={{ border: "2px solid", borderColor: theme.palette.primary.main }}>
                     <TextInputForm field="street" />
                     <TextInputForm field="city" />
                     <SelectForm field="state" options={states} />
@@ -48,22 +53,27 @@ export const CreateEmployee = () => {
             </Box>
             <SelectForm field="department" options={department} />
             <Box textAlign={'center'} my={2}>
-                <Button variant='contained' onClick={() => {
-                    const errorField = Object.keys(inputValidation).filter((field) => !inputValidation[field].validation(employee[field]))
-                    setFieldError(errorField)
-                    setVisible(true)
+                <Button variant='contained'
+                    style={{ background: theme.palette.primary.dark, color: theme.palette.text.light }}
+                    onClick={() => {
+                        const errorField = Object.keys(inputValidation).filter((field) => !inputValidation[field].validation(employee[field]))
+                        setFieldError(errorField)
+                        setVisible(true)
 
-                    if (!errorField.length) {
-                        dispatch(appendEmployee({ employee }))
-                        dispatch(reset())
-                    }
-                }}>
+                        if (!errorField.length) {
+                            dispatch(appendEmployee({ employee }))
+                            dispatch(reset())
+                        }
+                    }}>
                     Save
                 </Button>
             </Box>
             <Modal
                 open={isVisible}
-                onClose={() => setVisible(false)}
+                onClose={() => {
+                    setVisible(false)
+                    window.location.reload()
+                }}
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={{

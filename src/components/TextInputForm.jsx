@@ -4,18 +4,24 @@ import { inputValidation } from '../utils/inputValues'
 import { useState } from 'react'
 import { handleField } from '../utils/redux/createEmployee/createEmployee'
 import { useDispatch } from 'react-redux'
+import { theme } from '../utils/Theme'
 
 
 export const TextInputForm = ({ field }) => {
     const { label, error, type, validation } = inputValidation[field]
     const [displayErr, setDisplayErr] = useState(false)
     const dispatch = useDispatch()
+
     return (
         <Box my={2}>
-            <InputLabel>
+            <InputLabel style={{ color: theme.palette.text.dark }}>
                 {label}
             </InputLabel>
-            <Input onChange={() => setDisplayErr(false)} type={type}
+            <Input
+
+                style={{ color: theme.palette.text.dark, background: theme.palette.text.light.dark }}
+                onChange={() => setDisplayErr(false)}
+                type={type}
                 onBlur={(e) => {
                     if (!validation(e.target.value)) {
                         setDisplayErr(true)
