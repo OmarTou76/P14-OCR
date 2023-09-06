@@ -1,7 +1,7 @@
 import { Container, Box, Typography } from '@mui/material'
 import { columnsTable } from '../utils/inputValues'
 import { useSelector } from 'react-redux'
-import { DataTable } from 'table-library'
+import { DataTable } from 'react-data-table-lib'
 
 export const ViewEmployees = () => {
     const employees = useSelector(state => state.employees)
