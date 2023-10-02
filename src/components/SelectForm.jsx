@@ -18,7 +18,7 @@ export const SelectForm = ({ field, options }) => {
     }, [])
     return (
         <Box my={2} className='inputs'>
-            <InputLabel id="select_state" style={{ color: theme.palette.text.dark }}>{label}</InputLabel>
+            <InputLabel htmlFor={`select_${field}`} style={{ color: theme.palette.text.dark }}>{label}</InputLabel>
             <FormControl fullWidth>
                 <Select
                     labelId={`select_${field}`}

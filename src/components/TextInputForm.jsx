@@ -14,11 +14,11 @@ export const TextInputForm = ({ field }) => {
 
     return (
         <Box my={2}>
-            <InputLabel style={{ color: theme.palette.text.dark }}>
+            <InputLabel htmlFor={field} style={{ color: theme.palette.text.dark }}>
                 {label}
             </InputLabel>
             <Input
-
+                id={field}
                 style={{ color: theme.palette.text.dark, background: theme.palette.text.light.dark }}
                 onChange={() => setDisplayErr(false)}
                 type={type}
