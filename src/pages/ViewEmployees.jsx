@@ -29,7 +29,7 @@ export const ViewEmployees = () => {
                 </Typography>
             </Box>
             <div style={{ width: '100%' }}>
-                <DataTable searchBar rows={employees.concat(employees, employees, employees)} columns={columnsTable}
+                <DataTable searchBar rows={employees} columns={columnsTable}
                     theme={theme} itemsPerPage={[10, 5]} />
             </div>
 
