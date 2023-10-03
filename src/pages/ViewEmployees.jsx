@@ -32,7 +32,6 @@ export const ViewEmployees = () => {
                 <DataTable searchBar rows={employees} columns={columnsTable}
                     theme={theme} itemsPerPage={[10, 5]} />
             </div>
-
-        </Container >
+        </Container>
     )
 }   

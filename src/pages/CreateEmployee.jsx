@@ -21,7 +21,7 @@ export const CreateEmployee = () => {
             borderColor: theme.palette.primary.dark,
             color: theme.palette.text.dark,
             backgroundColor: theme.palette.primary.light,
-        }} >
+        }}>
             <Box align='center' my={2}>
                 <Typography variant='h4'>
                     HRnet
