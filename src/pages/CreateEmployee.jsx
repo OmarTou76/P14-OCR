@@ -1,4 +1,4 @@
-import { Container, Typography, Button, Box, Modal, List, ListItem, ListItemText } from '@mui/material'
+import { Container, Typography, Button, Box, Modal, List, ListItem, ListItemText, IconButton } from '@mui/material'
 import { TextInputForm } from '../components/TextInputForm'
 import { department, inputValidation, states } from '../utils/inputValues';
 import { useState } from 'react';
@@ -9,6 +9,7 @@ import { reset } from '../utils/redux/createEmployee/createEmployee';
 import { Link } from 'react-router-dom'
 import { appendEmployee } from '../utils/redux/employees/employees';
 import { theme } from '../utils/Theme';
+import { GridCloseIcon } from '@mui/x-data-grid';
 
 export const CreateEmployee = () => {
     const [fieldError, setFieldError] = useState([])
@@ -21,7 +22,7 @@ export const CreateEmployee = () => {
             borderColor: theme.palette.primary.dark,
             color: theme.palette.text.dark,
             backgroundColor: theme.palette.primary.light,
-        }} >
+        }}>
             <Box align='center' my={2}>
                 <Typography variant='h4'>
                     HRnet
@@ -75,6 +76,7 @@ export const CreateEmployee = () => {
                     window.location.reload()
                 }}
                 aria-describedby="modal-modal-description"
+
             >
                 <Box sx={{
                     position: 'absolute',
@@ -86,9 +88,18 @@ export const CreateEmployee = () => {
                     boxShadow: 24,
                     p: 4,
                 }}>
-                    {fieldError.length ?
+                    <Box style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                        <Typography>{fieldError.length ? "Please check these fields:" : "Employee created !"}</Typography>
+                        <IconButton onClick={() => {
+                            setVisible(false)
+                            if (!fieldError.length)
+                                window.location.reload()
+                        }}>
+                            <GridCloseIcon aria-description='close modal' />
+                        </IconButton>
+                    </Box>
+                    {fieldError.length > 0 &&
                         <>
-                            <Typography>Please check these fields: </Typography>
                             {
                                 <List>
                                     {fieldError.map(field => (
@@ -99,11 +110,9 @@ export const CreateEmployee = () => {
                                 </List>
                             }
                         </>
-                        :
-                        <Typography sx={{ mt: 2 }}>Employee Created</Typography>
                     }
                 </Box>
             </Modal>
-        </Container >
+        </Container>
     )
 }
