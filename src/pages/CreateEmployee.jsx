@@ -73,7 +73,8 @@ export const CreateEmployee = () => {
                 open={isVisible}
                 onClose={() => {
                     setVisible(false)
-                    window.location.reload()
+                    if (fieldError.length == 0)
+                        window.location.reload()
                 }}
                 aria-describedby="modal-modal-description"
 
@@ -92,7 +93,7 @@ export const CreateEmployee = () => {
                         <Typography>{fieldError.length ? "Please check these fields:" : "Employee created !"}</Typography>
                         <IconButton onClick={() => {
                             setVisible(false)
-                            if (!fieldError.length)
+                            if (fieldError.length == 0)
                                 window.location.reload()
                         }}>
                             <GridCloseIcon aria-description='close modal' />
