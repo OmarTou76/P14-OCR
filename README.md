@@ -16,23 +16,23 @@ HRnet application
 ## Installation
 To install and run HRnet locally, follow these steps:
 
-- Clone this repository to your local machine
-`git clone https://github.com/OmarTou76/P14-OCR`
+1. Clone this repository to your local machine
 
-## Start 
+`git clone https://github.com/OmarTou76/P14-OCR HRnet`
 
-From the root folder of the project, open a terminal and run:
+2. Navigate to the project directory.
+
+`cd HRnet`
+
+
+3. Install the necessary dependencies.
+
+`npm install`
+
+4. Build the application.
 
 `npm run dev`
 
-## Build 
-
-From the root folder of the project, open a terminal and run:
-
-`npm run build`
-
-## Preview 
-
-From the root folder of the project, open a terminal and run:
+5. Launch the built application
 
 `npm run preview`
