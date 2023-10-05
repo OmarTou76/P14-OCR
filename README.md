@@ -24,12 +24,12 @@ To install and run HRnet locally, follow these steps:
 
 3. Install the necessary dependencies.
 
-`npm install`
+`npm install | yarn install`
 
 4. Build the application.
 
-`npm run build`
+`npm run build | yarn run build`
 
 5. Launch the built application
 
-`npm run preview`
+`npm run preview | yarn run preview`
