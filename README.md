@@ -9,9 +9,6 @@
 - NodeJS
 - Npm or Yarn
 
-## Descripton
-
-HRnet application 
 
 ## Installation
 To install and run HRnet locally, follow these steps:
@@ -31,7 +28,7 @@ To install and run HRnet locally, follow these steps:
 
 4. Build the application.
 
-`npm run dev`
+`npm run build`
 
 5. Launch the built application
 
